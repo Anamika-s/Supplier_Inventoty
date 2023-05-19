@@ -1,25 +1,47 @@
 ﻿using AssignmentMvcEntity.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AssignmentMvcEntity.Controllers
 {
     public class InventoryController : Controller
     {
         IInventoryInterface _repo;
-        public InventoryController(IInventoryInterface repo)
+        ISupplierInterface _repo1;
+         
+        public InventoryController(IInventoryInterface repo, 
+            ISupplierInterface repo1)
         {
-            _repo = repo;            
+            _repo = repo;
+            _repo1 = repo1;
         }
         public IActionResult Index()
         {
             return View(_repo.GetInventory());
         }
-        public IActionResult Create() {
-            return View();
+        public IActionResult Create()
+        {
+            {
+
+                ViewData["SupplierId"] =
+                    new SelectList(_repo1.GetSupplier(),
+                    "SupplierId", "SupplierName"
+                    );
+                     
+
+                return View();
+            }
         }
         [HttpPost]
         public IActionResult Create(Inventory inventory)
         {
+          //var suppliers =  GetSuppliers();
+          //  ViewBag.suppliers = suppliers;
+            ///*inventory*/.Supplier = new SelectList(_repo1.GetSupplier().ToList(), "Id", "Name");
+
             _repo.Create(inventory);
             return RedirectToAction("Index");
         }
