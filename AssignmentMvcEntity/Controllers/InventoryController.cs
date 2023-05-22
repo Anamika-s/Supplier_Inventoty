@@ -20,6 +20,7 @@ namespace AssignmentMvcEntity.Controllers
         }
         public IActionResult Index()
         {
+
             return View(_repo.GetInventory());
         }
         public IActionResult Create()
@@ -38,10 +39,7 @@ namespace AssignmentMvcEntity.Controllers
         [HttpPost]
         public IActionResult Create(Inventory inventory)
         {
-          //var suppliers =  GetSuppliers();
-          //  ViewBag.suppliers = suppliers;
-            ///*inventory*/.Supplier = new SelectList(_repo1.GetSupplier().ToList(), "Id", "Name");
-
+          
             _repo.Create(inventory);
             return RedirectToAction("Index");
         }

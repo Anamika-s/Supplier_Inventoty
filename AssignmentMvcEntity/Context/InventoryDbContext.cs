@@ -13,5 +13,6 @@ namespace AssignmentMvcEntity.Context
 
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<AssignmentMvcEntity.Models.InventoryViewModel>? InventoryViewModel { get; set; }
     }
 }

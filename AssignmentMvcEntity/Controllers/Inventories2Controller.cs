@@ -82,7 +82,9 @@ namespace AssignmentMvcEntity.Controllers
             {
                 return NotFound();
             }
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", inventory.SupplierId);
+            ViewData["SupplierId"] =
+                new SelectList(_context.Suppliers, "SupplierId",
+                "SupplierId", inventory.SupplierId);
             return View(inventory);
         }
 
